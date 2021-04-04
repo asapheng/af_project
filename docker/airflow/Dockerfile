@@ -4,7 +4,7 @@ LABEL maintainer = 'Asaph Tinoco'
 
 #Definindo as variaveis que serão usadas para a instalação da imagem no container
 ARG AIRFLOW_VERSION=1.10.12
-ARG AIRFLOW_HOME=usr/local/home
+ARG AIRFLOW_HOME=/usr/local/home
 
 #Comando export no linux para declaracao da variavel home
 ENV AIRFLOW_HOME=${AIRFLOW_HOME}
