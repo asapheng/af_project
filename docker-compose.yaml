@@ -10,11 +10,11 @@ services:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow_db
-            healthcheck:
-                test: [ "CMD", "pg_isready", "-q", "-d", "airflow_db", "-U", "airflow" ]
-                timeout: 45s
-                interval: 10s
-                retries: 10
+        healthcheck:
+            test: [ "CMD", "pg_isready", "-q", "-d", "airflow_db", "-U", "airflow" ]
+            timeout: 45s
+            interval: 10s
+            retries: 10
 
     airflow:
         build: ./docker/airflow
@@ -27,7 +27,7 @@ services:
             timeout: 45s
             interval: 10s
             retries: 10
-            
+
 networks:
   default:
     name: airflow-network
