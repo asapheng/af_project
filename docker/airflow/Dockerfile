@@ -5,6 +5,7 @@ LABEL maintainer = 'Asaph Tinoco'
 #Definindo as variaveis que serão usadas para a instalação da imagem no container
 ARG AIRFLOW_VERSION=1.10.12
 ARG AIRFLOW_HOME=/usr/local/home
+ARG APACHE_INSTALL=apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh,docker,hdfs,redis,webhdfs]
 
 #Comando export no linux para declaracao da variavel home
 ENV AIRFLOW_HOME=${AIRFLOW_HOME}
@@ -47,7 +48,7 @@ COPY ./requirements-python3.7.txt /requirements-python3.7.txt
 # instalando pip com as bibliotecas anexas no arquivo externo
 RUN pip install --upgrade "pip==20.2.4" && \
     useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow && \
-    pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh,docker,hdfs,redis,webhdfs]==${AIRFLOW_VERSION} --constraint /requirements-python3.7.txt
+    pip install $APACHE_INSTALL==${AIRFLOW_VERSION} --constraint /requirements-python3.7.txt
 
 # chown -R --> mudar o dono da pasta / -R recursivamente, ou seja, todos os arquivos que vem embaixo dessa pasta tambem mudarao de dono 
 RUN chown -R airflow: ${AIRFLOW_HOME}
